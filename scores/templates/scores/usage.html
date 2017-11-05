@@ -1,0 +1,9 @@
+<h1>Usage</h1>
+
+<ul>
+  {% for type in types %}
+  <li>
+    <a href="{% url 'usage_detail' type.0 %}">{{ type.1 }}</a>
+  </li>
+  {% endfor %}
+</ul>

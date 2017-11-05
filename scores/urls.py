@@ -8,6 +8,7 @@ urlpatterns = [
     # browse by categories
     url(r'^incipit$', views.incipit, name='incipit'),
     url(r'^usage$', views.usage, name='usage'),
+    url(r'^usage/(?P<usage_id>[a-z]+)$', views.usage_detail, name='usage_detail'),
     url(r'^tag$', views.tag, name='tag'),
     url(r'^source$', views.source, name='source'),
 ]

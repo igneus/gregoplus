@@ -1,0 +1,10 @@
+<h1>{{ scores.0.get_office_part_display }}</h1>
+
+<ul>
+  {% for score in scores %}
+  <li>
+    <a href="{% url 'detail' score.id %}">{{ score.incipit }}</a>
+  </li>
+  {% endfor %}
+</ul>
+
