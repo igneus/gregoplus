@@ -10,13 +10,22 @@ def detail(request, score_id):
     return render(request, 'scores/detail.html', {'score': score})
 
 def incipit(request):
-    pass
+    incipits = [chr(i) for i in range(ord('A'), ord('Z'))]
+    return render(request, 'scores/incipit.html', {'incipits': incipits})
+
+def incipit_detail(request, incipit):
+    if incipit == '_':
+        scores = Score.objects.filter(incipit='')
+    else:
+        scores = Score.objects.filter(incipit__istartswith=incipit)
+
+    return render(request, 'scores/incipit_detail.html', {'scores': scores, 'incipit': incipit})
 
 def usage(request):
     return render(request, 'scores/usage.html', {'types': Score.OFFICE_PART_CHOICES})
 
 def usage_detail(request, usage_id):
-    scores = Score.objects.filter(office_part=usage_id).order_by('incipit')
+    scores = Score.objects.filter(office_part=usage_id)
     if len(scores) == 0:
         raise Http404()
     return render(request, 'scores/usage_detail.html', {'scores': scores})

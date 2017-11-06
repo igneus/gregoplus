@@ -33,3 +33,4 @@ class Score(models.Model):
     mode = models.CharField(max_length=8)
     class Meta:
         db_table = 'gregobase_chants'
+        ordering = ('incipit',)

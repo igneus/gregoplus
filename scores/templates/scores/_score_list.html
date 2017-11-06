@@ -1,0 +1,7 @@
+<ul>
+    {% for score in scores %}
+        <li>
+            <a href="{% url 'detail' score.id %}">{{ score.incipit | default:'no lyrics' }}</a> ({{ score.version }})
+        </li>
+    {% endfor %}
+</ul>
