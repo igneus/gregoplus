@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
-from .models import Score
+from .models import Score, Source
 
 def index(request):
     return render(request, 'scores/index.html')
@@ -34,4 +34,10 @@ def tag(request):
     pass
 
 def source(request):
-    pass
+    sources = Source.objects.all()
+    return render(request, 'scores/source.html', {'sources': sources})
+
+def source_detail(request, source_id):
+    source = get_object_or_404(Source, id=source_id)
+    source_chants = source.chantsource_set.all()
+    return render(request, 'scores/source_detail.html', {'source': source, 'source_chants': source_chants})

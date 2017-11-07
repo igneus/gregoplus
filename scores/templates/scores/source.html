@@ -1,0 +1,9 @@
+<h1>Source</h1>
+
+<ul>
+    {% for source in sources %}
+        <li>
+            <a href="{% url 'source_detail' source.id %}">{{ source.year }} - {{ source.editor }} - {{ source.title }}</a>
+        </li>
+    {% endfor %}
+</ul>

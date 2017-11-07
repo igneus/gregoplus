@@ -30,7 +30,7 @@ class Score(models.Model):
     )
     version = models.CharField(max_length=128)
     incipit = models.CharField(max_length=256)
-    initial = models.IntegerField
+    initial = models.IntegerField()
     office_part = models.CharField(
         max_length=16,
         db_column='office-part',
@@ -40,3 +40,26 @@ class Score(models.Model):
     class Meta:
         db_table = 'gregobase_chants'
         ordering = ('incipit',)
+
+class Source(models.Model):
+    year = models.IntegerField()
+    editor = models.CharField(max_length=128)
+    title = models.CharField(max_length=256)
+    description = models.TextField()
+    caption = models.TextField()
+    pages = models.TextField()
+    scores = models.ManyToManyField(Score, through='ChantSource')
+    class Meta:
+        db_table = 'gregobase_sources'
+        ordering = ('-year', 'title')
+
+class ChantSource(models.Model):
+    chant = models.ForeignKey(Score, primary_key=True)
+    source = models.ForeignKey(Source, db_column='source')
+    page = models.CharField(max_length=16)
+    sequence = models.IntegerField()
+    extent = models.IntegerField()
+    class Meta:
+        db_table = 'gregobase_chant_sources'
+        unique_together = (('chant', 'source', 'page'),)
+        ordering = ('sequence',)

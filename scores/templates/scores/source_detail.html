@@ -1,0 +1,13 @@
+<h1>{{ source.title }}</h1>
+
+<ul>
+    {% for sc in source_chants %}
+        <li>
+            ({{ sc.page }})
+            <a href="{% url 'detail' sc.chant.id %}">{{ sc.chant.incipit | default:'no lyrics' }}</a>
+            {% if sc.chant.version is not None %}
+                ({{ sc.chant.version }})
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
