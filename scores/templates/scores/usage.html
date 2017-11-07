@@ -1,9 +1,12 @@
 <h1>Usage</h1>
 
-<ul>
-  {% for type in types %}
-  <li>
-    <a href="{% url 'usage_detail' type.0 %}">{{ type.1 }}</a>
-  </li>
-  {% endfor %}
-</ul>
+{% for group_name, group_content in types %}
+    <h2>{{ group_name }}</h2>
+    <ul>
+        {% for type in group_content %}
+            <li>
+                <a href="{% url 'usage_detail' type.0 %}">{{ type.1 }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endfor %}
