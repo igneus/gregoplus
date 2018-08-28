@@ -5,8 +5,8 @@
 is a unique resource of Gregorian chant scores
 transcribed using
 [Gregorio](http://gregorio-project.github.io/),
-but it's codebase is horrible, there is almost no
-active development and contributions are not accepted.
+but there is almost no active development
+and contributions are not accepted.
 
 Fortunately, the database is publicly available.
 Thus *gregoplus* uses *GregoBase*'s database to make it's contents
