@@ -3,7 +3,7 @@ from django.db import models
 class Score(models.Model):
     # see https://github.com/gregorio-project/GregoBase/blob/master/include/txt.php
     OFFICE_PART_CHOICES = (
-        ('Mass', (
+        ('Missa', (
             ('in', 'Introitus'),
             ('ky', 'Kyriale'),
             ('gr', 'Graduale'),
@@ -15,7 +15,7 @@ class Score(models.Model):
             ('co', 'Communio'),
             ('tr', 'Tractus'),
         )),
-        ('Divine Office', (
+        ('Officium divinum', (
             ('an', 'Antiphona'),
             ('ca', 'Canticum'),
             ('hy', 'Hymnus'),
