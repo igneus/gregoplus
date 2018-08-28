@@ -3,27 +3,6 @@ import json
 class Gabc:
     """ knows how to build gabc from a Score """
 
-    OFFICE_PART_TABLE = {
-        'al': 'Alleluia',
-        'an': 'Antiphona',
-        'ca': 'Canticum',
-        'co': 'Communio',
-        'gr': 'Graduale',
-        'hy': 'Hymnus',
-        'in': 'Introitus',
-        'im': 'Improperia',
-        'ky': 'Kyriale',
-        'of': 'Offertorium',
-        'ps': 'Psalmus',
-        're': 'Responsorium',
-        'rb': 'Responsorium breve',
-        'se': 'Sequentia',
-        'tr': 'Tractus',
-        'or': 'Toni Communes',
-        'pr': 'Praefationes in tono solemni',
-        'va': 'Varia',
-    }
-
     def __init__(self, score):
         self._score = score
 
@@ -45,10 +24,7 @@ class Gabc:
 
         if self._score.office_part:
             part = self._score.office_part
-            part_name = part
-            if part in self.OFFICE_PART_TABLE:
-                part_name = self.OFFICE_PART_TABLE[part]
-            header.append("office-part: " + part_name)
+            header.append("office-part: " + self._score.get_office_part_display())
 
         fields = [
             'mode',
