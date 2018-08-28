@@ -5,6 +5,7 @@
             {% if score.version is not None %}
                 ({{ score.version }})
             {% endif %}
+            [<a href="{% url 'gabc' score.id %}">gabc</a>]
         </li>
     {% endfor %}
 </ul>

@@ -37,6 +37,10 @@ class Score(models.Model):
         choices=OFFICE_PART_CHOICES,
     )
     mode = models.CharField(max_length=8)
+    gabc = models.TextField()
+    gabc_verses = models.TextField()
+    transcriber = models.CharField(max_length=128)
+    commentary = models.CharField(max_length=256)
     class Meta:
         db_table = 'gregobase_chants'
         ordering = ('incipit',)

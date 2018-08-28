@@ -1,6 +1,7 @@
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from .models import Score, Source
+from .gabc import Gabc
 
 def index(request):
     return render(request, 'scores/index.html')
@@ -8,6 +9,10 @@ def index(request):
 def detail(request, score_id):
     score = get_object_or_404(Score, id=score_id)
     return render(request, 'scores/detail.html', {'score': score})
+
+def gabc(request, score_id):
+    score = get_object_or_404(Score, id=score_id)
+    return HttpResponse(Gabc(score))
 
 def incipit(request):
     incipits = [chr(i) for i in range(ord('A'), ord('Z'))]
