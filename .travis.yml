@@ -8,9 +8,10 @@ addons:
 script:
   - python manage.py test
 env:
-  - SECRET_KEY=not_really_secret_key_for_tests
-  - DEBUG=true
-  - DB_NAME=gregoplus
-  - DB_USER=travis
-  - DB_PASSWORD=
-  - DB_HOST=localhost
+  global:
+    - SECRET_KEY=not_really_secret_key_for_tests
+    - DEBUG=true
+    - DB_NAME=gregoplus
+    - DB_USER=travis
+    - DB_PASSWORD=
+    - DB_HOST=localhost
