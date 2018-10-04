@@ -30,7 +30,7 @@ class Score(models.Model):
     )
     version = models.CharField(max_length=128)
     incipit = models.CharField(max_length=256)
-    initial = models.IntegerField()
+    initial = models.IntegerField(default=1)
     office_part = models.CharField(
         max_length=16,
         db_column='office-part',
