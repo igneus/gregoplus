@@ -58,8 +58,8 @@ class Source(models.Model):
         ordering = ('-year', 'title')
 
 class ChantSource(models.Model):
-    chant = models.ForeignKey(Score, primary_key=True)
-    source = models.ForeignKey(Source, db_column='source')
+    chant = models.ForeignKey(Score, primary_key=True, on_delete=models.CASCADE)
+    source = models.ForeignKey(Source, db_column='source', on_delete=models.CASCADE)
     page = models.CharField(max_length=16)
     sequence = models.IntegerField()
     extent = models.IntegerField()
