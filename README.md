@@ -1,7 +1,5 @@
 # gregoplus
 
-[![Build Status](https://travis-ci.org/igneus/gregobase.svg?branch=master)](https://travis-ci.org/igneus/gregobase)
-
 [GregoBase](https://gregobase.selapa.net/)
 ([sources](https://github.com/olivierberten/GregoBase))
 is a unique resource of Gregorian chant scores
