@@ -11,14 +11,14 @@ but there is almost no active development
 and contributions are not accepted.
 
 Fortunately, the database is publicly available.
-Thus *gregoplus* uses *GregoBase*'s database to make it's contents
+Thus *gregoplus* uses *GregoBase*'s database to make its contents
 more accessible.
 The site is read-only. It doesn't attempt to replace
 *GregoBase*, but to provide additional tools for exploring
-it's contents.
+its contents.
 
 Contributions are warmly welcome.
-Python has been chosen as implementation language,
+Python was chosen as implementation language,
 because it seems to be the scripting language of choice
 in the open source music engraving community.
 
