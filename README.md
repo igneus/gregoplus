@@ -33,6 +33,8 @@ in the open source music engraving community.
 * get [GregoBase DB export](https://github.com/gregorio-project/GregoBase/blob/master/gregobase_online.sql),
   import it in a MySQL database, e. g. `$ mysql -u myuser < gregobase_online.sql`
 * install requirements `$ pip install -r requirements.txt`
+* copy `.env.template` to `.env`, populate it with the required values
+  (or otherwise set the respective environment variables)
 * run migrations `$ python manage.py migrate`
 * for local development `$ python manage.py runserver`, for production deployment see Django documentation
 
