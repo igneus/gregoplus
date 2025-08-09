@@ -28,27 +28,30 @@ class Score(models.Model):
             ('va', 'Varia'),
         ))
     )
-    version = models.CharField(max_length=128)
     incipit = models.CharField(max_length=256)
-    initial = models.IntegerField(default=1)
     office_part = models.CharField(
         max_length=16,
         db_column='office-part',
         choices=OFFICE_PART_CHOICES,
     )
     mode = models.CharField(max_length=8)
+    version = models.CharField(max_length=128)
     gabc = models.TextField()
+    initial = models.IntegerField(default=1)
     gabc_verses = models.TextField()
-    transcriber = models.CharField(max_length=128)
     commentary = models.CharField(max_length=256)
+    transcriber = models.CharField(max_length=128)
     class Meta:
         db_table = 'gregobase_chants'
         ordering = ('incipit',)
 
+    def __str__(self):
+        return f'#{self.id} {self.incipit} ({self.office_part}, {self.version})'
+
 class Source(models.Model):
+    title = models.CharField(max_length=256)
     year = models.IntegerField()
     editor = models.CharField(max_length=128)
-    title = models.CharField(max_length=256)
     description = models.TextField()
     caption = models.TextField()
     pages = models.TextField()
@@ -56,6 +59,9 @@ class Source(models.Model):
     class Meta:
         db_table = 'gregobase_sources'
         ordering = ('-year', 'title')
+
+    def __str__(self):
+        return f'#{self.id} {self.title} ({self.editor} {self.year})'
 
 class ChantSource(models.Model):
     chant = models.ForeignKey(Score, primary_key=True, on_delete=models.CASCADE)
@@ -66,4 +72,4 @@ class ChantSource(models.Model):
     class Meta:
         db_table = 'gregobase_chant_sources'
         unique_together = (('chant', 'source', 'page'),)
-        ordering = ('sequence',)
+        ordering = ('source', 'page', 'sequence',)
