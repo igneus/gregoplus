@@ -35,7 +35,9 @@ class ChantSourceAdmin(admin.ModelAdmin):
         'chant__id',
         'chant__incipit',
         'chant__office_part',
-        'source',
+        'source__id',
+        'source__title',
+        'source__year',
         'page',
         'sequence',
     ]
