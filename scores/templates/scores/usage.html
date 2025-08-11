@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>Usage</h1>
 
 {% for group_name, group_content in types %}
@@ -10,3 +13,4 @@
         {% endfor %}
     </ul>
 {% endfor %}
+{% endblock %}

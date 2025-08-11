@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>{% block title %}{% endblock %} | Grego+</title>
+</head>
+<body>
+  <h1>Grego+</h1>
+  <nav>
+    <ul>
+      <li>
+        <a href="{% url 'home.index' %}">Home</a>
+      </li>
+      <li>
+        <a href="{% url 'incipit' %}">By incipit</a>
+      </li>
+      <li>
+        <a href="{% url 'usage' %}">By usage</a>
+      </li>
+      <li>
+        <a href="{% url 'tag' %}">By tag</a>
+      </li>
+      <li>
+        <a href="{% url 'source' %}">By source</a>
+      </li>
+    </ul>
+  </nav>
+
+  {% block content %}{% endblock %}
+</body>
+</html>
