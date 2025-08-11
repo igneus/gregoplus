@@ -33,7 +33,10 @@ def usage_detail(request, usage_id):
     scores = Score.objects.filter(office_part=usage_id)
     if len(scores) == 0:
         raise Http404()
-    return render(request, 'scores/usage_detail.html', {'scores': scores})
+    return render(request, 'scores/usage_detail.html', {
+        'scores': scores,
+        'title': scores[0].get_office_part_display(),
+    })
 
 def tag(request):
     pass
