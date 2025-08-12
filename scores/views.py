@@ -2,6 +2,7 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from .models import Chant, Source, Tag
 from .gabc import Gabc
+from .utils import paginate_if_needed
 
 def index(request):
     return render(request, 'scores/index.html')
@@ -27,18 +28,26 @@ def incipit_detail(request, incipit):
     else:
         scores = Chant.objects.filter(incipit__istartswith=incipit)
 
-    return render(request, 'scores/incipit_detail.html', {'scores': scores, 'incipit': incipit})
+    scores, page_obj = paginate_if_needed(scores, request)
+    return render(request, 'scores/incipit_detail.html', {
+        'scores': scores,
+        'incipit': incipit,
+        'page_obj': page_obj,
+    })
 
 def usage(request):
     return render(request, 'scores/usage.html', {'types': Chant.OFFICE_PART_CHOICES})
 
 def usage_detail(request, usage_id):
     scores = Chant.objects.filter(office_part=usage_id)
-    if len(scores) == 0:
+    if scores.count() == 0:
         raise Http404()
+
+    scores, page_obj = paginate_if_needed(scores, request)
     return render(request, 'scores/usage_detail.html', {
         'scores': scores,
-        'title': scores[0].get_office_part_display(),
+        'title': scores[0].get_office_part_display() if hasattr(scores, '__iter__') and scores else Chant.objects.filter(office_part=usage_id).first().get_office_part_display(),
+        'page_obj': page_obj,
     })
 
 def tag(request):
@@ -48,9 +57,11 @@ def tag(request):
 def tag_detail(request, tag_id):
     tag = get_object_or_404(Tag, pk=tag_id)
     scores = Chant.objects.filter(tags=tag)
+    scores, page_obj = paginate_if_needed(scores, request)
     return render(request, 'scores/tag_detail.html', {
         'tag': tag,
         'scores': scores,
+        'page_obj': page_obj,
     })
 
 def source(request):
@@ -60,4 +71,9 @@ def source(request):
 def source_detail(request, source_id):
     source = get_object_or_404(Source, id=source_id)
     source_chants = source.chantsource_set.all()
-    return render(request, 'scores/source_detail.html', {'source': source, 'source_chants': source_chants})
+    source_chants, page_obj = paginate_if_needed(source_chants, request)
+    return render(request, 'scores/source_detail.html', {
+        'source': source,
+        'source_chants': source_chants,
+        'page_obj': page_obj,
+    })
