@@ -25,7 +25,6 @@ in the open source music engraving community.
 - [ ] parameterized filtering
 - [ ] mass gabc export
 - [ ] complete score text (for copy-pasting, reachability by fulltext search etc.)
-- [ ] links to the CANTUS database
 - [ ] JSON API
 
 ## Running
