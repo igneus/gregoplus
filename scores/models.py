@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models import CompositePrimaryKey
 
 
-class Score(models.Model):
+class Chant(models.Model):
     # see https://github.com/gregorio-project/GregoBase/blob/master/include/txt.php
     OFFICE_PART_CHOICES = (
         ('Missa', (
@@ -58,7 +58,7 @@ class Source(models.Model):
     description = models.TextField()
     caption = models.TextField()
     pages = models.TextField()
-    scores = models.ManyToManyField(Score, through='ChantSource')
+    scores = models.ManyToManyField(Chant, through='ChantSource')
     class Meta:
         db_table = 'gregobase_sources'
         ordering = ('-year', 'title')
@@ -67,7 +67,7 @@ class Source(models.Model):
         return f'#{self.id} {self.title} ({self.editor} {self.year})'
 
 class ChantSource(models.Model):
-    chant = models.ForeignKey(Score, primary_key=True, on_delete=models.CASCADE)
+    chant = models.ForeignKey(Chant, primary_key=True, on_delete=models.CASCADE)
     source = models.ForeignKey(Source, db_column='source', on_delete=models.CASCADE)
     page = models.CharField(max_length=16)
     sequence = models.IntegerField()
@@ -92,7 +92,7 @@ class Tag(models.Model):
 class ChantTag(models.Model):
     pk = CompositePrimaryKey('chant_id', 'tag_id')
     chant = models.ForeignKey(
-        Score,
+        Chant,
         on_delete=models.CASCADE,
         db_column='chant_id',
     )

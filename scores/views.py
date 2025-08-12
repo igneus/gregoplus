@@ -1,17 +1,17 @@
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
-from .models import Score, Source, Tag
+from .models import Chant, Source, Tag
 from .gabc import Gabc
 
 def index(request):
     return render(request, 'scores/index.html')
 
 def detail(request, score_id):
-    score = get_object_or_404(Score, id=score_id)
+    score = get_object_or_404(Chant, id=score_id)
     return render(request, 'scores/detail.html', {'score': score})
 
 def gabc(request, score_id):
-    score = get_object_or_404(Score, id=score_id)
+    score = get_object_or_404(Chant, id=score_id)
     return HttpResponse(Gabc(score))
 
 def incipit(request):
@@ -20,17 +20,17 @@ def incipit(request):
 
 def incipit_detail(request, incipit):
     if incipit == '_':
-        scores = Score.objects.filter(incipit='')
+        scores = Chant.objects.filter(incipit='')
     else:
-        scores = Score.objects.filter(incipit__istartswith=incipit)
+        scores = Chant.objects.filter(incipit__istartswith=incipit)
 
     return render(request, 'scores/incipit_detail.html', {'scores': scores, 'incipit': incipit})
 
 def usage(request):
-    return render(request, 'scores/usage.html', {'types': Score.OFFICE_PART_CHOICES})
+    return render(request, 'scores/usage.html', {'types': Chant.OFFICE_PART_CHOICES})
 
 def usage_detail(request, usage_id):
-    scores = Score.objects.filter(office_part=usage_id)
+    scores = Chant.objects.filter(office_part=usage_id)
     if len(scores) == 0:
         raise Http404()
     return render(request, 'scores/usage_detail.html', {
@@ -44,7 +44,7 @@ def tag(request):
 
 def tag_detail(request, tag_id):
     tag = get_object_or_404(Tag, pk=tag_id)
-    scores = Score.objects.filter(tags=tag)
+    scores = Chant.objects.filter(tags=tag)
     return render(request, 'scores/tag_detail.html', {
         'tag': tag,
         'scores': scores,

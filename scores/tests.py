@@ -1,13 +1,13 @@
 from django.test import TestCase, Client
 import json
-from .models import Score, Source, ChantSource
+from .models import Chant, Source, ChantSource
 import unittest
 
 class ScoresTest(TestCase):
     "Test that all views load without error"
 
     def setUp(self):
-        self._score = Score.objects.create(
+        self._score = Chant.objects.create(
             incipit='Alleluia',
             gabc='"(c4) Al(h)le(h)lu(hh)ia(f!gaGFE) (::)"',
             office_part='va', # va = varia (codes inherited from gregobase)

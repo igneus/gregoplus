@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from . import models
 
-@admin.register(models.Score)
+@admin.register(models.Chant)
 class ScoreAdmin(admin.ModelAdmin):
     list_display = [
         'id',
