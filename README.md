@@ -1,24 +1,15 @@
 # gregoplus
 
+Readonly chant database based on the publicly available
 [GregoBase](https://gregobase.selapa.net/)
 ([sources](https://github.com/olivierberten/GregoBase))
-is a unique resource of Gregorian chant scores
-transcribed using
-[Gregorio](http://gregorio-project.github.io/),
-but there is almost no active development
-and contributions are not accepted.
+database dump.
 
-Fortunately, the database is publicly available.
-Thus *gregoplus* uses *GregoBase*'s database to make its contents
-more accessible.
-The site is read-only. It doesn't attempt to replace
-*GregoBase*, but to provide additional tools for exploring
-its contents.
-
-Contributions are warmly welcome.
-Python was chosen as implementation language,
-because it seems to be the scripting language of choice
-in the open source music engraving community.
+GregoBase has been great in attracting contributors and accumulating
+chant transcriptions ready for reuse;
+GregoPlus strives to use the full potential of the data thus collected
+and provide its users with improved tools for browsing, searching
+and analyzing the chant repertory.
 
 ## Desired features
 
