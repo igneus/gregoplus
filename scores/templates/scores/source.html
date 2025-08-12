@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Source</h1>
+<h1>{% block title %}Source{% endblock %}</h1>
 
 <ul>
     {% for source in sources %}

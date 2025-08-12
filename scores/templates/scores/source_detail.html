@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ source.title }}</h1>
+<h1>{% block title %}{{ source.title }}{% endblock %}</h1>
 
 <ul>
     {% for sc in source_chants %}

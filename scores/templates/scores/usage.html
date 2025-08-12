@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Usage</h1>
+<h1>{% block title %}Usage{% endblock %}</h1>
 
 {% for group_name, group_content in types %}
     <h2>{{ group_name }}</h2>

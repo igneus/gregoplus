@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Incipit</h1>
+<h1>{% block title %}Incipit{% endblock %}</h1>
 
 <a href="{% url 'incipit_detail' '_' %}">no lyrics</a>
 {% for i in incipits %}
