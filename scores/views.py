@@ -1,6 +1,6 @@
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
-from .models import Score, Source
+from .models import Score, Source, Tag
 from .gabc import Gabc
 
 def index(request):
@@ -39,7 +39,16 @@ def usage_detail(request, usage_id):
     })
 
 def tag(request):
-    pass
+    tags = Tag.objects.all()
+    return render(request, 'scores/tag.html', {'tags': tags})
+
+def tag_detail(request, tag_id):
+    tag = get_object_or_404(Tag, pk=tag_id)
+    scores = Score.objects.filter(tags=tag)
+    return render(request, 'scores/tag_detail.html', {
+        'tag': tag,
+        'scores': scores,
+    })
 
 def source(request):
     sources = Source.objects.all()

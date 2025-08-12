@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %}{{ tag }}{% endblock %}</h1>
+
+{% include './_score_list.html' %}
+{% endblock %}

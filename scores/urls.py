@@ -12,6 +12,7 @@ urlpatterns = [
     path('usage', views.usage, name='usage'),
     re_path(r'^usage/(?P<usage_id>[a-z]+)$', views.usage_detail, name='usage_detail'),
     path('tag', views.tag, name='tag'),
+    path('tag/<int:tag_id>', views.tag_detail, name='tag_detail'),
     path('source', views.source, name='source'),
     path('source/<int:source_id>', views.source_detail, name='source_detail'),
 ]

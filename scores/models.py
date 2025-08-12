@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import CompositePrimaryKey
+
 
 class Score(models.Model):
     # see https://github.com/gregorio-project/GregoBase/blob/master/include/txt.php
@@ -41,6 +43,7 @@ class Score(models.Model):
     gabc_verses = models.TextField()
     commentary = models.CharField(max_length=256)
     transcriber = models.CharField(max_length=128)
+    tags = models.ManyToManyField('Tag', through='ChantTag', related_name='scores')
     class Meta:
         db_table = 'gregobase_chants'
         ordering = ('incipit',)
@@ -73,3 +76,32 @@ class ChantSource(models.Model):
         db_table = 'gregobase_chant_sources'
         unique_together = (('chant', 'source', 'page'),)
         ordering = ('source', 'page', 'sequence',)
+
+class Tag(models.Model):
+    id = models.AutoField(primary_key=True)
+    tag = models.CharField(max_length=255, unique=True)
+
+    class Meta:
+        db_table = 'gregobase_tags'
+        ordering = ('tag',)
+
+    def __str__(self):
+        return self.tag
+
+
+class ChantTag(models.Model):
+    pk = CompositePrimaryKey('chant_id', 'tag_id')
+    chant = models.ForeignKey(
+        Score,
+        on_delete=models.CASCADE,
+        db_column='chant_id',
+    )
+    tag = models.ForeignKey(
+        Tag,
+        on_delete=models.CASCADE,
+        db_column='tag_id',
+    )
+
+    class Meta:
+        db_table = 'gregobase_chant_tags'
+        unique_together = (('chant', 'tag'),)
