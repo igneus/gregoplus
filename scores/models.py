@@ -41,6 +41,7 @@ class Chant(models.Model):
     gabc = models.TextField()
     initial = models.IntegerField(default=1)
     gabc_verses = models.TextField()
+    cantusid = models.CharField(max_length=32)
     commentary = models.CharField(max_length=256)
     transcriber = models.CharField(max_length=128)
     tags = models.ManyToManyField('Tag', through='ChantTag', related_name='scores')

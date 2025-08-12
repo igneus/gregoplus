@@ -3,22 +3,33 @@
 {% block content %}
 <h1>{% block title %}{{ score.incipit }}{% endblock %}</h1>
 
+<a href="{% url 'gabc' score.id %}" class="btn btn-primary">GABC</a>
+<a href="https://gregobase.selapa.net/chant.php?id={{ score.id }}" class="btn btn-secondary">GregoBase</a>
+{% if score.cantusid %}
+<a href="https://cantusindex.org/id/{{ score.cantusid }}" class="btn btn-secondary">CantusIndex</a>
+{% endif %}
+
 <h2>Version</h2>
 {{ score.version }}
 
 <h2>Usage</h2>
-{{ score.get_office_part_display }}
+<a href="{% url 'usage_detail' score.office_part %}">{{ score.get_office_part_display }}</a>
+
+<h2>Tags</h2>
+{% if tags|length == 0 %}
+<p><em>No tags.</em></p>
+{% else %}
+<ul>
+  {% for tag in tags %}
+  <li><a href="{% url 'tag_detail' tag.id %}">{{ tag }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
 
 <h2>Sources</h2>
-TODO
-
-<h2>Download</h2>
-<p>
-  <a href="{% url 'gabc' score.id %}">GABC</a>
-</p>
+<pre>
+{{ score.gabc }}
+</pre>
 
 <img src="https://gregobase.selapa.net/chant_img.php?id={{ score.id }}" alt="{{ score.incipit }}">
-<p>
-  <a href="https://gregobase.selapa.net/chant.php?id={{ score.id }}">See <em>{{ score.incipit }}</em> at GregoBase</a>
-</p>
 {% endblock %}

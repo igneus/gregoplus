@@ -8,7 +8,10 @@ def index(request):
 
 def detail(request, score_id):
     score = get_object_or_404(Chant, id=score_id)
-    return render(request, 'scores/detail.html', {'score': score})
+    return render(request, 'scores/detail.html', {
+        'score': score,
+        'tags': score.tags.all(),
+    })
 
 def gabc(request, score_id):
     score = get_object_or_404(Chant, id=score_id)
