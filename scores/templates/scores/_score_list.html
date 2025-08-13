@@ -1,13 +1,34 @@
-<ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th>incipit</th>
+      <th>usage</th>
+      <th>mode</th>
+      <th>version</th>
+      <th>CANTUS ID</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
     {% for score in scores %}
-        <li>
-            <a href="{% url 'detail' score.id %}">{{ score.incipit | default:'no lyrics' }}</a>
-            {% if score.version is not None %}
-                ({{ score.version }})
-            {% endif %}
-            [<a href="{% url 'gabc' score.id %}">gabc</a>]
-        </li>
+    <tr>
+      <td><a href="{% url 'detail' score.id %}">{{ score.incipit | default:'[no lyrics]' }}</a></td>
+      <td><a href="{% url 'usage_detail' score.office_part %}">{{ score.get_office_part_display }}</a></td>
+      <td>{{ score.mode|default:'' }}</td>
+      <td>
+        {% if score.version is not None %}
+          {{ score.version }}
+        {% endif %}
+      </td>
+      <td>
+        {% if score.cantusid %}
+          <a href="https://cantusindex.org/id/{{ score.cantusid }}">{{ score.cantusid }}</a>
+        {% endif %}
+      </td>
+      <td><a href="{% url 'gabc' score.id %}" class="btn btn-sm btn-outline-secondary">gabc</a></td>
+    </tr>
     {% endfor %}
-</ul>
+  </tbody>
+</table>
 
 {% include './_pagination.html' %}
