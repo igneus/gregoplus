@@ -45,6 +45,7 @@ class Chant(models.Model):
     commentary = models.CharField(max_length=256)
     transcriber = models.CharField(max_length=128)
     tags = models.ManyToManyField('Tag', through='ChantTag', related_name='scores')
+    sources = models.ManyToManyField('Source', through='ChantSource', related_name='chants')
     class Meta:
         db_table = 'gregobase_chants'
         ordering = ('incipit',)
@@ -59,7 +60,6 @@ class Source(models.Model):
     description = models.TextField()
     caption = models.TextField()
     pages = models.TextField()
-    scores = models.ManyToManyField(Chant, through='ChantSource')
     class Meta:
         db_table = 'gregobase_sources'
         ordering = ('-year', 'title')
@@ -68,8 +68,8 @@ class Source(models.Model):
         return f'#{self.id} {self.title} ({self.editor} {self.year})'
 
 class ChantSource(models.Model):
-    chant = models.ForeignKey(Chant, primary_key=True, on_delete=models.CASCADE)
-    source = models.ForeignKey(Source, db_column='source', on_delete=models.CASCADE)
+    chant = models.ForeignKey(Chant, primary_key=True, on_delete=models.CASCADE, related_name='chant_sources')
+    source = models.ForeignKey(Source, db_column='source', on_delete=models.CASCADE, related_name='chant_sources')
     page = models.CharField(max_length=16)
     sequence = models.IntegerField()
     extent = models.IntegerField()

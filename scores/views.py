@@ -12,6 +12,7 @@ def detail(request, score_id):
     return render(request, 'scores/detail.html', {
         'score': score,
         'tags': score.tags.all(),
+        'chant_sources': score.chant_sources.all(),
     })
 
 def gabc(request, score_id):
@@ -70,7 +71,7 @@ def source(request):
 
 def source_detail(request, source_id):
     source = get_object_or_404(Source, id=source_id)
-    source_chants = source.chantsource_set.all()
+    source_chants = source.chant_sources.all()
     source_chants, page_obj = paginate_if_needed(source_chants, request)
     return render(request, 'scores/source_detail.html', {
         'source': source,

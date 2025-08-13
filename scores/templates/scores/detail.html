@@ -27,6 +27,24 @@
 {% endif %}
 
 <h2>Sources</h2>
+{% if chant_sources|length == 0 %}
+<p><em>No sources.</em></p>
+{% else %}
+<ul>
+  {% for cs in chant_sources %}
+  <li>
+    <a href="{% url 'source_detail' cs.source.id %}">
+      <em>{{ cs.source.title }}</em>,
+      {{ cs.source.editor }}
+      {{ cs.source.year }}
+    </a>,
+    p. {{ cs.page }}
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<h2>GABC</h2>
 <pre>
 {{ score.gabc }}
 </pre>
