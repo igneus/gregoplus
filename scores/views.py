@@ -1,6 +1,6 @@
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
-from .models import Chant, Source, Tag
+from .models import Chant, Source, Tag, ChantWithSource
 from .gabc import Gabc
 from .utils import paginate_if_needed
 
@@ -73,8 +73,9 @@ def source_detail(request, source_id):
     source = get_object_or_404(Source, id=source_id)
     source_chants = source.chant_sources.all()
     source_chants, page_obj = paginate_if_needed(source_chants, request)
+    source_chants = map(ChantWithSource, source_chants)
     return render(request, 'scores/source_detail.html', {
         'source': source,
-        'source_chants': source_chants,
+        'scores': source_chants,
         'page_obj': page_obj,
     })

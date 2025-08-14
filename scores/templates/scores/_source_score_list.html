@@ -1,0 +1,9 @@
+{% extends 'scores/_score_list.html' %}
+
+{% block thead_prepend %}
+  <th>page</th>
+{% endblock %}
+
+{% block tbody_tr_prepend %}
+  <td>{{ score.page }}</td>
+{% endblock %}

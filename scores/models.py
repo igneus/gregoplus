@@ -78,6 +78,24 @@ class ChantSource(models.Model):
         unique_together = (('chant', 'source', 'page'),)
         ordering = ('source', 'page', 'sequence',)
 
+class ChantWithSource:
+    """
+    View model exposing ChantSource data for use cases
+    where API compatibility with Chant is desirable
+    """
+
+    def __init__(self, chant_source: ChantSource):
+        self.chant_source = chant_source
+        self.chant = chant_source.chant
+        self.source = chant_source.source
+
+    @property
+    def page(self):
+        return self.chant_source.page
+
+    def __getattr__(self, item):
+        return getattr(self.chant, item)
+
 class Tag(models.Model):
     id = models.AutoField(primary_key=True)
     tag = models.CharField(max_length=255, unique=True)

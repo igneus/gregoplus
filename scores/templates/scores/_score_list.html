@@ -1,6 +1,8 @@
 <table class="table">
   <thead>
     <tr>
+      {% block thead_prepend %}
+      {% endblock %}
       <th>incipit</th>
       <th>usage</th>
       <th>mode</th>
@@ -12,6 +14,8 @@
   <tbody>
     {% for score in scores %}
     <tr>
+      {% block tbody_tr_prepend %}
+      {% endblock %}
       <td><a href="{% url 'detail' score.id %}">{{ score.incipit | default:'[no lyrics]' }}</a></td>
       <td><a href="{% url 'usage_detail' score.office_part %}">{{ score.get_office_part_display }}</a></td>
       <td>{{ score.mode|default:'' }}</td>
