@@ -13,7 +13,6 @@ class Chant(models.Model):
             ('se', 'Sequentia'),
             ('of', 'Offertorium'),
             ('pr', 'Praefationes in tono solemni'),
-            ('ps', 'Offertorium'),
             ('co', 'Communio'),
             ('tr', 'Tractus'),
         )),
@@ -27,6 +26,7 @@ class Chant(models.Model):
         ('Cetera', (
             ('or', 'Toni Communes'),
             ('im', 'Improperia'),
+            ('ps', 'Psalmus'),
             ('va', 'Varia'),
         ))
     )
