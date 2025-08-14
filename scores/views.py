@@ -20,7 +20,7 @@ def gabc(request, score_id):
     return HttpResponse(Gabc(score))
 
 def incipit(request):
-    incipits = [chr(i) for i in range(ord('A'), ord('Z'))]
+    incipits = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
     return render(request, 'scores/incipit.html', {'incipits': incipits})
 
 def incipit_detail(request, incipit):
