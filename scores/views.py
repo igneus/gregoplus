@@ -24,8 +24,10 @@ def incipit(request):
     return render(request, 'scores/incipit.html', {'incipits': incipits})
 
 def incipit_detail(request, incipit):
-    if incipit == '_':
+    if incipit == 'no-lyrics':
         scores = Chant.objects.filter(incipit='')
+    elif incipit == 'other':
+        scores = Chant.objects.filter(incipit__iregex='^[^a-z]+')
     else:
         scores = Chant.objects.filter(incipit__istartswith=incipit)
 

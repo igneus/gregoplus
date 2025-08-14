@@ -8,7 +8,7 @@ urlpatterns = [
     path('<int:score_id>.gabc', views.gabc, name='gabc'),
     # browse by categories
     path('incipit', views.incipit, name='incipit'),
-    re_path(r'^incipit/(?P<incipit>[_A-Z]{1})$', views.incipit_detail, name='incipit_detail'),
+    re_path(r'^incipit/(?P<incipit>([A-Z]{1}|no-lyrics|other))$', views.incipit_detail, name='incipit_detail'),
     path('usage', views.usage, name='usage'),
     re_path(r'^usage/(?P<usage_id>[a-z]+)$', views.usage_detail, name='usage_detail'),
     path('tag', views.tag, name='tag'),
