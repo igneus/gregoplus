@@ -3,5 +3,9 @@
 {% block content %}
 <h1>{% block title %}{{ source.title }}{% endblock %}</h1>
 
+<p>
+  {% include 'scores/_source_citation.html' with long=True %}
+</p>
+
 {% include './_source_score_list.html' %}
 {% endblock %}

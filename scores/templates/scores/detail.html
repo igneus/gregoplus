@@ -51,9 +51,7 @@
         {% for cs in chant_sources %}
         <li>
           <a href="{% url 'source_detail' cs.source.id %}">
-            <em>{{ cs.source.title }}</em>,
-            {{ cs.source.editor }}
-            {{ cs.source.year }}
+            {% include 'scores/_source_citation.html' with source=cs.source %}
           </a>,
           p. {{ cs.page }}
         </li>
