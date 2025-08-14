@@ -3,11 +3,22 @@
 {% block content %}
 <h1>{% block title %}{{ score.incipit }}{% endblock %}</h1>
 
-<a href="{% url 'gabc' score.id %}" class="btn btn-primary">GABC</a>
-<a href="https://gregobase.selapa.net/chant.php?id={{ score.id }}" class="btn btn-secondary">GregoBase</a>
-{% if score.cantusid %}
-<a href="https://cantusindex.org/id/{{ score.cantusid }}" class="btn btn-secondary">CantusIndex</a>
-{% endif %}
+<div class="my-4">
+  <a href="{% url 'gabc' score.id %}" class="btn btn-primary">
+    <i class="bi bi-download mx-1"></i>
+    GABC
+  </a>
+  <a href="https://gregobase.selapa.net/chant.php?id={{ score.id }}" class="btn btn-secondary">
+    <i class="bi bi-box-arrow-up-right mx-1"></i>
+    GregoBase
+  </a>
+  {% if score.cantusid %}
+  <a href="https://cantusindex.org/id/{{ score.cantusid }}" class="btn btn-secondary">
+    <i class="bi bi-box-arrow-up-right mx-1"></i>
+    CantusIndex
+  </a>
+  {% endif %}
+</div>
 
 <div class="container">
   <div class="row g-4">
