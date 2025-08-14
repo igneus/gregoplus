@@ -9,45 +9,52 @@
 <a href="https://cantusindex.org/id/{{ score.cantusid }}" class="btn btn-secondary">CantusIndex</a>
 {% endif %}
 
-<h2>Version</h2>
-{{ score.version }}
+<div class="container">
+  <div class="row g-4">
+    <div class="col col-md-4 order-md-last">
+      <img src="https://gregobase.selapa.net/chant_img.php?id={{ score.id }}" alt="{{ score.incipit }}">
+    </div>
+    <div class="col col-md-8">
+      <h2 class="h4">Version</h2>
+      {{ score.version }}
 
-<h2>Usage</h2>
-<a href="{% url 'usage_detail' score.office_part %}">{{ score.get_office_part_display }}</a>
+      <h2 class="h4">Usage</h2>
+      <a href="{% url 'usage_detail' score.office_part %}">{{ score.get_office_part_display }}</a>
 
-<h2>Tags</h2>
-{% if tags|length == 0 %}
-<p><em>No tags.</em></p>
-{% else %}
-<ul>
-  {% for tag in tags %}
-  <li><a href="{% url 'tag_detail' tag.id %}">{{ tag }}</a></li>
-  {% endfor %}
-</ul>
-{% endif %}
+      <h2 class="h4">Tags</h2>
+      {% if tags|length == 0 %}
+      <p><em>No tags.</em></p>
+      {% else %}
+      <ul>
+        {% for tag in tags %}
+        <li><a href="{% url 'tag_detail' tag.id %}">{{ tag }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
 
-<h2>Sources</h2>
-{% if chant_sources|length == 0 %}
-<p><em>No sources.</em></p>
-{% else %}
-<ul>
-  {% for cs in chant_sources %}
-  <li>
-    <a href="{% url 'source_detail' cs.source.id %}">
-      <em>{{ cs.source.title }}</em>,
-      {{ cs.source.editor }}
-      {{ cs.source.year }}
-    </a>,
-    p. {{ cs.page }}
-  </li>
-  {% endfor %}
-</ul>
-{% endif %}
+      <h2 class="h4">Sources</h2>
+      {% if chant_sources|length == 0 %}
+      <p><em>No sources.</em></p>
+      {% else %}
+      <ul>
+        {% for cs in chant_sources %}
+        <li>
+          <a href="{% url 'source_detail' cs.source.id %}">
+            <em>{{ cs.source.title }}</em>,
+            {{ cs.source.editor }}
+            {{ cs.source.year }}
+          </a>,
+          p. {{ cs.page }}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
 
-<h2>GABC</h2>
-<pre>
-{{ score.gabc }}
-</pre>
-
-<img src="https://gregobase.selapa.net/chant_img.php?id={{ score.id }}" alt="{{ score.incipit }}">
+      <h2 class="h4">GABC</h2>
+      <pre class="text-wrap">
+      {{ score.gabc }}
+      </pre>
+    </div>
+  </div>
+</div>
 {% endblock %}
