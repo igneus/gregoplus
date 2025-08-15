@@ -11,6 +11,7 @@ def detail(request, score_id):
     score = get_object_or_404(Chant, id=score_id)
     return render(request, 'scores/detail.html', {
         'score': score,
+        'gabc': Gabc(score),
         'tags': score.tags.all(),
         'chant_sources': score.chant_sources.all(),
     })
