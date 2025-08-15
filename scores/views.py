@@ -1,5 +1,7 @@
+from django.db.models import Count
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
+
 from .models import Chant, Source, Tag, ChantWithSource
 from .gabc import Gabc
 from .utils import paginate_if_needed
@@ -55,7 +57,7 @@ def usage_detail(request, usage_id):
     })
 
 def tag(request):
-    tags = Tag.objects.all()
+    tags = Tag.objects.annotate(chant_count=Count('scores')).filter(chant_count__gt=1)
     return render(request, 'scores/tag.html', {'tags': tags})
 
 def tag_detail(request, tag_id):
