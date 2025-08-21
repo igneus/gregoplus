@@ -5,4 +5,4 @@ class HomeTest(TestCase):
         client = Client()
         response = client.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Gregoplus')
+        self.assertContains(response, 'Grego+')
