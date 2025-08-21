@@ -23,5 +23,5 @@ urlpatterns = [
     path('scores/', include('scores.urls')),
 ]
 
-if os.environ['ADMIN_SITE_ENABLED'] == 'true':
+if os.environ.get('ADMIN_SITE_ENABLED') == 'true':
     urlpatterns.append(path('admin/', admin.site.urls))
