@@ -20,7 +20,7 @@ def detail(request, score_id):
 
 def gabc(request, score_id):
     score = get_object_or_404(Chant, id=score_id)
-    return HttpResponse(Gabc(score))
+    return HttpResponse(Gabc(score), content_type='text/plain; charset=utf-8')
 
 def incipit(request):
     incipits = [chr(i) for i in range(ord('A'), ord('Z') + 1)]

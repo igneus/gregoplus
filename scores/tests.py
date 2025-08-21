@@ -43,7 +43,7 @@ class ScoresTest(TestCase):
         client = Client()
         response = client.get('/scores/{}.gabc'.format(self._score.id))
         self.assertEqual(response.status_code, 200)
-        # TODO: check correct Content-Type
+        self.assertEqual(response.headers['Content-Type'], 'text/plain; charset=utf-8')
         self.assertIn(
             json.loads(self._score.gabc),
             str(response.content)
