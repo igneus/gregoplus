@@ -71,7 +71,6 @@ class ScoresTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self._score.incipit)
 
-    @unittest.skip('view not implemented yet')
     def test_tag(self):
         client = Client()
         response = client.get('/scores/tag')
