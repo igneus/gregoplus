@@ -27,6 +27,10 @@ class Chant(models.Model):
             ('or', 'Toni Communes'),
             ('im', 'Improperia'),
             ('ps', 'Psalmus'),
+            ('pa', 'Prosa'),
+            ('rh', 'Rhythmus'),
+            ('su', 'Supplicatio'),
+            ('tp', 'Tropus'),
             ('va', 'Varia'),
         ))
     )
