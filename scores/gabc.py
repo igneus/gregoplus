@@ -3,12 +3,12 @@ from json import JSONDecodeError
 
 
 class Gabc:
-    """ knows how to build gabc from a Score """
+    """ knows how to build gabc from a Chant """
 
-    def __init__(self, score):
-        self._score = score
+    def __init__(self, chant):
+        self._chant = chant
         try:
-            self._json = json.loads(self._score.gabc)
+            self._json = json.loads(self._chant.gabc)
         except JSONDecodeError:
             raise ValueError('Value of the Chant.gabc property must be a valid JSON')
 
@@ -27,10 +27,10 @@ class Gabc:
         gabc header
         """
         header = []
-        header.append("name: " + self._score.incipit)
+        header.append("name: " + self._chant.incipit)
 
-        if self._score.office_part:
-            header.append("office-part: " + self._score.get_office_part_display())
+        if self._chant.office_part:
+            header.append("office-part: " + self._chant.get_office_part_display())
 
         fields = [
             'mode',
@@ -38,7 +38,7 @@ class Gabc:
             'commentary',
         ]
         for field_name in fields:
-            field_value = getattr(self._score, field_name)
+            field_value = getattr(self._chant, field_name)
             if field_value:
                 header.append(field_name + ": " + field_value)
 
@@ -64,8 +64,8 @@ class Gabc:
     @property
     def gabc_with_verses(self):
         verses = ''
-        if self._score.gabc_verses:
-            verses = "\n" + self._score.gabc_verses
+        if self._chant.gabc_verses:
+            verses = "\n" + self._chant.gabc_verses
         return self.gabc + verses
 
     @property
