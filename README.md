@@ -20,12 +20,12 @@ and analyzing the chant repertory.
 
 ## Running
 
-* get [GregoBase DB export](https://github.com/gregorio-project/GregoBase/blob/master/gregobase_online.sql),
-  import it in a MySQL database, e. g. `$ mysql -u myuser < gregobase_online.sql`
 * install requirements `$ pip install -r requirements.txt`
-* copy `.env.template` to `.env`, populate it with the required values
+* `$ docker compose up` to spin up a dockerized MariaDB instance
+  (or otherwise make available a compatible database server)
+* copy `.env.template` to `.env`, populate it with db credentials and other required values
   (or otherwise set the respective environment variables)
-* run migrations `$ python manage.py migrate`
+* `$ ./init_data.sh` to initialize the database
 * for local development `$ python manage.py runserver`, for production deployment see Django documentation
 
 ## License
