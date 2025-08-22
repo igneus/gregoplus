@@ -1,5 +1,7 @@
 # gregoplus
 
+![Build Status](https://github.com/igneus/gregoplus/actions/workflows/ci.yml/badge.svg)
+
 Readonly chant database based on the publicly available
 [GregoBase](https://gregobase.selapa.net/)
 ([sources](https://github.com/olivierberten/GregoBase))
@@ -27,6 +29,10 @@ and analyzing the chant repertory.
   (or otherwise set the respective environment variables)
 * `$ ./init_data.sh` to initialize the database
 * for local development `$ python manage.py runserver`, for production deployment see Django documentation
+
+## Tests
+
+`$ python manage.py test`
 
 ## License
 
