@@ -18,9 +18,10 @@ import os
 from django.urls import include, path
 from django.contrib import admin
 
+app_name = 'gregoplus'
 urlpatterns = [
-    path('', include('home.urls')),
-    path('scores/', include('scores.urls')),
+    path('', include('home.urls', namespace='home')),
+    path('scores/', include('scores.urls', namespace='scores')),
 ]
 
 if os.environ.get('ADMIN_SITE_ENABLED') == 'true':

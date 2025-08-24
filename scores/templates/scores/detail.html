@@ -4,7 +4,7 @@
 <h1>{% block title %}{{ score.incipit }}{% endblock %}</h1>
 
 <div class="my-4">
-  <a href="{% url 'gabc' score.id %}" class="btn btn-primary">
+  <a href="{% url 'scores:gabc' score.id %}" class="btn btn-primary">
     <i class="bi bi-download mx-1"></i>
     GABC
   </a>
@@ -38,7 +38,7 @@
       {% else %}
       <ul>
         {% for tag in tags %}
-        <li><a href="{% url 'tag_detail' tag.id %}">{{ tag }}</a></li>
+        <li><a href="{% url 'scores:tag_detail' tag.id %}">{{ tag }}</a></li>
         {% endfor %}
       </ul>
       {% endif %}
@@ -50,7 +50,7 @@
       <ul>
         {% for cs in chant_sources %}
         <li>
-          <a href="{% url 'source_detail' cs.source.id %}">
+          <a href="{% url 'scores:source_detail' cs.source.id %}">
             {% include 'scores/_source_citation.html' with source=cs.source %}
           </a>,
           p. {{ cs.page }}

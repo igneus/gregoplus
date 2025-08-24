@@ -16,7 +16,7 @@
     <tr>
       {% block tbody_tr_prepend %}
       {% endblock %}
-      <td><a href="{% url 'detail' score.id %}">{{ score.incipit | default:'[no lyrics]' }}</a></td>
+      <td><a href="{% url 'scores:detail' score.id %}">{{ score.incipit | default:'[no lyrics]' }}</a></td>
       <td>{% include 'scores/_office_part.html' %}</td>
       <td>{{ score.mode|default:'' }}</td>
       <td>
@@ -29,7 +29,7 @@
           <a href="https://cantusindex.org/id/{{ score.cantusid }}">{{ score.cantusid }}</a>
         {% endif %}
       </td>
-      <td><a href="{% url 'gabc' score.id %}" class="btn btn-sm btn-outline-secondary">GABC</a></td>
+      <td><a href="{% url 'scores:gabc' score.id %}" class="btn btn-sm btn-outline-secondary">GABC</a></td>
     </tr>
     {% endfor %}
   </tbody>

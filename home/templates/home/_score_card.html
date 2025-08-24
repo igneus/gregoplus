@@ -3,7 +3,7 @@
     {% include 'scores/_office_part.html' %}
     {{ score.incipit }}
     <div class="text-center my-3">
-      <a href="{% url 'detail' score.id %}">
+      <a href="{% url 'scores:detail' score.id %}">
         <img src="https://gregobase.selapa.net/chant_img.php?id={{ score.id }}" alt="{{ score.incipit }}" style="max-width: 100%;">
       </a>
     </div>
