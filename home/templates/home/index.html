@@ -5,12 +5,14 @@
 {% block content %}
 <div class="container">
   <p>
-    Grego+ [gregoplus] :
-    readonly site providing additional means to explore data of
-    <a href="https://gregobase.selapa.net/">GregoBase</a>.
-    Based on the database dump
-    (available on <a href="https://github.com/gregorio-project/GregoBase">Github</a>),
-    not up-to-date with live GregoBase.
+    <strong>Grego+</strong> [gregoplus]
+    is a read-only database of Gregorian chant pieces from modern era (cca 1880+) editions.<br>
+    Data based on the <a href="https://gregobase.selapa.net/">GregoBase</a>
+    database dump
+    (available on <a href="https://github.com/gregorio-project/GregoBase">Github</a>).<br>
+
+    <strong>{{ chant_count }}</strong> chants,
+    <strong>{{ source_count }}</strong> <a href="{% url 'source' %}">books</a>.
   </p>
 
   <div class="row my-4">
