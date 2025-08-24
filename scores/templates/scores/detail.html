@@ -30,7 +30,7 @@
       {{ score.version }}
 
       <h2 class="h4">Usage</h2>
-      <a href="{% url 'usage_detail' score.office_part %}">{{ score.get_office_part_display }}</a>
+      {% include 'scores/_office_part.html' %}
 
       <h2 class="h4">Tags</h2>
       {% if tags|length == 0 %}

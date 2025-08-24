@@ -1,0 +1,3 @@
+{% if score.office_part %}
+  <a href="{% url 'usage_detail' score.office_part %}">{{ score.get_office_part_display }}</a>
+{% endif %}

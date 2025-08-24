@@ -17,11 +17,7 @@
       {% block tbody_tr_prepend %}
       {% endblock %}
       <td><a href="{% url 'detail' score.id %}">{{ score.incipit | default:'[no lyrics]' }}</a></td>
-      <td>
-        {% if score.office_part %}
-          <a href="{% url 'usage_detail' score.office_part %}">{{ score.get_office_part_display }}</a>
-        {% endif %}
-      </td>
+      <td>{% include 'scores/_office_part.html' %}</td>
       <td>{{ score.mode|default:'' }}</td>
       <td>
         {% if score.version is not None %}
