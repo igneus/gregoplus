@@ -60,7 +60,7 @@ class Gabc:
             try:
                 return next(filter(lambda x: x[0] == 'gabc', self._json))[1]
             except StopIteration:
-                raise ValueError('The JSON array variant of Chant.gabc value must contain at least one item of type "gabc"')
+                return ''
         else:
             raise ValueError('Unsupported JSON value type')
 

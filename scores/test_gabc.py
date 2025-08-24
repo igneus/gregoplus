@@ -54,8 +54,10 @@ class GabcTest(TestCase):
             gabc='[["tex", "some TeX code", {}]]'
         )
         gabc = Gabc(chant)
-        with self.assertRaisesRegex(ValueError, r'at least one item of type "gabc"'):
+        self.assertEqual(
+            "name: Amen;\n%%\n",
             str(gabc)
+        )
 
     def test_unsupported_type(self):
         chant = Chant(
