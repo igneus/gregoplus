@@ -7,9 +7,9 @@ from scores.models import Chant
 
 class GabcTest(TestCase):
     def test_null(self):
-        chant = Chant()
-        with self.assertRaisesRegex(ValueError, r'must be a valid JSON'):
-            Gabc(chant)
+        chant = Chant(incipit=None, gabc=None)
+        gabc = Gabc(chant)
+        self.assertEqual("name: ;\n%%\n", str(gabc))
 
     def test_empty_but_valid(self):
         chant = Chant(gabc='""')

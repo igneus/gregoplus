@@ -7,10 +7,13 @@ class Gabc:
 
     def __init__(self, chant):
         self._chant = chant
-        try:
-            self._json = json.loads(self._chant.gabc)
-        except JSONDecodeError:
-            raise ValueError('Value of the Chant.gabc property must be a valid JSON')
+
+        self._json = ''
+        if chant.gabc is not None:
+            try:
+                self._json = json.loads(chant.gabc)
+            except JSONDecodeError:
+                raise ValueError('Value of the Chant.gabc property must be a valid JSON')
 
 
     def __str__(self):
@@ -27,10 +30,10 @@ class Gabc:
         gabc header
         """
         header = []
-        header.append("name: " + self._chant.incipit)
+        header.append(f'name: {self._chant.incipit or ""}')
 
         if self._chant.office_part:
-            header.append("office-part: " + self._chant.get_office_part_display())
+            header.append(f'office-part: {self._chant.get_office_part_display()}')
 
         fields = [
             'mode',
@@ -40,7 +43,7 @@ class Gabc:
         for field_name in fields:
             field_value = getattr(self._chant, field_name)
             if field_value:
-                header.append(field_name + ": " + field_value)
+                header.append(f'{field_name}: {field_value}')
 
         delim = ";\n"
         return delim.join(header) + delim
