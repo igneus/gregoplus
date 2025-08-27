@@ -9,7 +9,7 @@ class Gabc:
         self._chant = chant
 
         self._json = ''
-        if chant.gabc is not None:
+        if chant.gabc not in (None, ''):
             try:
                 self._json = json.loads(chant.gabc)
             except JSONDecodeError:

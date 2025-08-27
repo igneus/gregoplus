@@ -7,11 +7,21 @@ from scores.models import Chant
 
 class GabcTest(TestCase):
     def test_null(self):
-        chant = Chant(incipit=None, gabc=None)
-        gabc = Gabc(chant)
-        self.assertEqual("name: ;\n%%\n", str(gabc))
+        """
+        gabc values which are not valid JSON, but are present in the database
+        and we handle them gracefully
+        """
+        gabc_null_values = (
+            None,
+            '',
+        )
+        for i in gabc_null_values:
+            with self.subTest(i):
+                chant = Chant(incipit=None, gabc=i)
+                gabc = Gabc(chant)
+                self.assertEqual("name: ;\n%%\n", str(gabc))
 
-    def test_empty_but_valid(self):
+    def test_json_string_empty(self):
         chant = Chant(gabc='""')
         gabc = Gabc(chant)
         self.assertEqual("name: ;\n%%\n", str(gabc))
