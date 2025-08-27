@@ -7,7 +7,12 @@ from .gabc import Gabc
 from .utils import paginate_if_needed
 
 def index(request):
-    return render(request, 'scores/index.html')
+    scores = Chant.objects.all()
+    scores, page_obj = paginate_if_needed(scores, request)
+    return render(request, 'scores/index.html', {
+        'scores': scores,
+        'page_obj': page_obj,
+    })
 
 def detail(request, score_id):
     score = get_object_or_404(Chant, id=score_id)

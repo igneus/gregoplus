@@ -3,18 +3,5 @@
 {% block content %}
 <h1>{% block title %}Scores{% endblock %}</h1>
 
-<ul>
-  <li>
-    <a href="{% url 'scores:incipit' %}">By incipit</a>
-  </li>
-  <li>
-    <a href="{% url 'scores:usage' %}">By usage</a>
-  </li>
-  <li>
-    <a href="{% url 'scores:tag' %}">By tag</a>
-  </li>
-  <li>
-    <a href="{% url 'scores:source' %}">By source</a>
-  </li>
-</ul>
+{% include './_score_list.html' %}
 {% endblock %}
