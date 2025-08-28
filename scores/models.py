@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import CompositePrimaryKey
+from django.urls import reverse
 
 
 class Chant(models.Model):
@@ -63,6 +64,9 @@ class Chant(models.Model):
     def __str__(self):
         return f'#{self.id} {self.incipit} ({self.office_part}, {self.version})'
 
+    def get_absolute_url(self):
+        return reverse('scores:detail', args=[self.id])
+
 class Source(models.Model):
     title = models.CharField(max_length=256)
     year = models.IntegerField()
@@ -76,6 +80,9 @@ class Source(models.Model):
 
     def __str__(self):
         return f'#{self.id} {self.title} ({self.editor} {self.year})'
+
+    def get_absolute_url(self):
+        return reverse('scores:source_detail', args=[self.id])
 
 class ChantSource(models.Model):
     chant = models.ForeignKey(Chant, primary_key=True, on_delete=models.CASCADE, related_name='chant_sources')
