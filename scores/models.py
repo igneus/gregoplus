@@ -36,6 +36,7 @@ class Chant(models.Model):
             ('va', 'Varia'),
         ))
     )
+    id = models.AutoField(primary_key=True)
     incipit = models.CharField(max_length=256)
     office_part = models.CharField(
         max_length=16,
@@ -79,6 +80,7 @@ class Chant(models.Model):
         return slugify(self.incipit)
 
 class Source(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=256)
     year = models.IntegerField()
     editor = models.CharField(max_length=128)
@@ -96,6 +98,8 @@ class Source(models.Model):
         return reverse('scores:source_detail', args=[self.id])
 
 class ChantSource(models.Model):
+    # TODO in fact this model has a composite primary key, but as of Django 5.2
+    #   Django Admin doesn't support that, so we pretend to have a simple one
     chant = models.ForeignKey(Chant, primary_key=True, on_delete=models.CASCADE, related_name='chant_sources')
     source = models.ForeignKey(Source, db_column='source', on_delete=models.CASCADE, related_name='chant_sources')
     page = models.CharField(max_length=16)
