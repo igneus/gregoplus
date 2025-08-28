@@ -25,4 +25,5 @@ urlpatterns = [
 ]
 
 if os.environ.get('ADMIN_SITE_ENABLED') == 'true':
+    urlpatterns.append(path('admin/doc/', include('django.contrib.admindocs.urls')))
     urlpatterns.append(path('admin/', admin.site.urls))

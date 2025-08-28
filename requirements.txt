@@ -1,6 +1,7 @@
 asgiref==3.9.1
 click==8.2.1
 Django==5.2.5
+docutils==0.22
 mysqlclient==2.2.7
 python-dotenv==1.1.1
 pytz==2025.2
