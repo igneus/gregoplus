@@ -3,9 +3,10 @@ from django.urls import path, re_path
 from . import views
 
 app_name='scores'
+
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<int:score_id>', views.detail, name='detail'),
+    re_path(r'^(?P<score_id>\d+)(-(?P<office_part>[a-z]{2}))?(-(?P<incipit_slug>[-\w]+))?$', views.detail, name='detail'),
     path('<int:score_id>.gabc', views.gabc, name='gabc'),
     # browse by categories
     path('incipit', views.incipit, name='incipit'),

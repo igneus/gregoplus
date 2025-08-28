@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import CompositePrimaryKey
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 class Chant(models.Model):
@@ -66,7 +67,16 @@ class Chant(models.Model):
         return f'#{self.id} {self.incipit} ({self.office_part}, {self.version})'
 
     def get_absolute_url(self):
-        return reverse('scores:detail', args=[self.id])
+        parts = [
+            self.id,
+            self.office_part,
+            self.incipit_slug()
+        ]
+        args = '-'.join([str(p) for p in parts if p is not None and p != ''])
+        return reverse('scores:detail', args=[args])
+
+    def incipit_slug(self):
+        return slugify(self.incipit)
 
 class Source(models.Model):
     title = models.CharField(max_length=256)

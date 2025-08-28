@@ -35,9 +35,66 @@ class ScoresTest(TestCase):
 
     def test_detail(self):
         client = Client()
-        response = client.get('/scores/{}'.format(self._score.id))
+        response = client.get('/scores/{}-va-alleluia'.format(self._score.id))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self._score.incipit)
+
+    def test_detail__incorrect_slug(self):
+        """
+        URLs with incorrect/incomplete slug are redirected
+        """
+        client = Client()
+        paths = [
+            '/scores/{}',
+            '/scores/{}-va',
+            '/scores/{}-va-all',
+            '/scores/{}-xxx',
+        ]
+        for p in paths:
+            with self.subTest(p):
+                response = client.get(p.format(self._score.id))
+                self.assertEqual(response.status_code, 301)
+                self.assertEqual(
+                    '/scores/{}-va-alleluia'.format(self._score.id),
+                    response.headers['Location']
+                )
+
+    def test_detail__empty_properties(self):
+        """
+        instances with empty properties used in the URL are handled correctly
+        """
+        empty_office_part = Chant.objects.create(
+            incipit='Alleluia',
+            office_part=None
+        )
+        empty_office_part2 = Chant.objects.create(
+            incipit='Alleluia',
+            office_part=''
+        )
+        empty_incipit = Chant.objects.create(
+            incipit='',
+            office_part='va'
+        )
+        all_empty = Chant.objects.create(
+            incipit='',
+            office_part=None
+        )
+
+        client = Client()
+        paths = [
+            (empty_office_part, '/scores/{}-alleluia'),
+            (empty_office_part2, '/scores/{}-alleluia'),
+            (empty_incipit, '/scores/{}-va'),
+            (all_empty, '/scores/{}'),
+        ]
+        for chant, p in paths:
+            with self.subTest(p):
+                real_path = p.format(chant.id)
+                self.assertEqual(real_path, chant.get_absolute_url())
+
+                response = client.get(real_path)
+                self.assertNotIn('Location', response.headers)
+                self.assertEqual(response.status_code, 200)
 
     def test_gabc(self):
         client = Client()

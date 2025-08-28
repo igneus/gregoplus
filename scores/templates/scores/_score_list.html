@@ -16,7 +16,7 @@
     <tr>
       {% block tbody_tr_prepend %}
       {% endblock %}
-      <td><a href="{% url 'scores:detail' score.id %}">{{ score.incipit | default:'[no lyrics]' }}</a></td>
+      <td><a href="{{ score.get_absolute_url }}">{{ score.incipit | default:'[no lyrics]' }}</a></td>
       <td>{% include 'scores/_office_part.html' %}</td>
       <td>{{ score.mode|default:'' }}</td>
       <td>

@@ -1,6 +1,6 @@
 from django.db.models import Count
 from django.http import Http404, HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 
 from .models import Chant, Source, Tag, ChantWithSource
 from .gabc import Gabc
@@ -14,8 +14,15 @@ def index(request):
         'page_obj': page_obj,
     })
 
-def detail(request, score_id):
+def detail(request, score_id, office_part=None, incipit_slug=None):
     score = get_object_or_404(Chant, id=score_id)
+
+    def _normalize_empty(val):
+        return None if val in (None, '') else val
+
+    if office_part != _normalize_empty(score.office_part) or incipit_slug != _normalize_empty(score.incipit_slug()):
+        return redirect(score.get_absolute_url(), permanent=True)
+
     return render(request, 'scores/detail.html', {
         'score': score,
         'gabc': Gabc(score),
