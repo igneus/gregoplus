@@ -32,6 +32,18 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'scores:source' %}">By source</a>
           </li>
+
+          {% if request.user.is_authenticated and request.user.is_staff %}
+          <li class="nav-item">
+            <a class="nav-link text-danger" href="{% url 'admin:index' %}">Admin</a>
+          </li>
+          <li class="nav-item">
+            <form method="post" action="{% url 'admin:logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="nav-link text-danger">Log out</button>
+            </form>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </div>
