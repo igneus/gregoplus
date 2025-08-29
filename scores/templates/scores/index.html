@@ -3,5 +3,29 @@
 {% block content %}
 <h1>{% block title %}Scores{% endblock %}</h1>
 
+<form method="get" class="mb-3">
+  <div class="row gy-2 gx-3 align-items-start">
+    <div class="col-12 col-md-4">
+      {{ form.incipit.label_tag }}
+      {{ form.incipit }}
+    </div>
+
+    <div class="col-12 col-md-4">
+      <div class="mb-1 fw-semibold">{{ form.office_part.label }}</div>
+      {{ form.office_part }}
+    </div>
+
+    <div class="col-12 col-md-4">
+      <div class="mb-1 fw-semibold">{{ form.mode.label }}</div>
+      {{ form.mode }}
+    </div>
+
+    <div class="col-12 mt-2">
+      <button type="submit" class="btn btn-primary">Filter</button>
+      <a class="btn btn-outline-secondary" href="{% url 'scores:index' %}">Reset</a>
+    </div>
+  </div>
+</form>
+
 {% include './_score_list.html' %}
 {% endblock %}

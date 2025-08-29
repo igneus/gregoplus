@@ -5,13 +5,29 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .models import Chant, Source, Tag, ChantWithSource
 from .gabc import Gabc
 from .utils import paginate_if_needed
+from .forms import ChantFilterForm
 
 def index(request):
-    scores = Chant.objects.all()
-    scores, page_obj = paginate_if_needed(scores, request)
+    qs = Chant.objects.all()
+
+    form = ChantFilterForm(request.GET or None)
+    if form.is_valid():
+        incipit = form.cleaned_data.get('incipit') or ''
+        office_parts = form.cleaned_data.get('office_part') or []
+        modes = form.cleaned_data.get('mode') or []
+
+        if incipit:
+            qs = qs.filter(incipit__icontains=incipit)
+        if office_parts:
+            qs = qs.filter(office_part__in=office_parts)
+        if modes:
+            qs = qs.filter(mode__in=modes)
+
+    scores, page_obj = paginate_if_needed(qs, request)
     return render(request, 'scores/index.html', {
         'scores': scores,
         'page_obj': page_obj,
+        'form': form,
     })
 
 def detail(request, score_id, office_part=None, incipit_slug=None):
