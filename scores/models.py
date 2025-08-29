@@ -22,7 +22,7 @@ class Chant(models.Model):
             ('an', 'Antiphona'),
             ('ca', 'Canticum'),
             ('hy', 'Hymnus'),
-            ('rb', 'Responsorium breve'),  # "breve" is correct
+            ('rb', 'Responsorium breve'),
             ('re', 'Responsorium'),
         )),
         ('Cetera', (
