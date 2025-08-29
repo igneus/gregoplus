@@ -18,7 +18,10 @@
       {% endblock %}
       <td><a href="{{ score.get_absolute_url }}">{{ score.incipit | default:'[no lyrics]' }}</a></td>
       <td>{% include 'scores/_office_part.html' %}</td>
-      <td>{{ score.mode|default:'' }}</td>
+      <td>
+        {{ score.mode|default:'' }}
+        {% if score.mode_var %}<span class="text-secondary small">{{ score.mode_var }}</span>{% endif %}
+      </td>
       <td>
         {% if score.version is not None %}
           {{ score.version }}
