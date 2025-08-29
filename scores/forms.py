@@ -1,4 +1,3 @@
-import roman
 from django import forms
 
 from .models import Chant
@@ -27,17 +26,4 @@ class ChantFilterForm(forms.Form):
                 office_choices.append((code, label))
         self.fields['office_part'].choices = office_choices
 
-        modes = (
-            Chant.objects.exclude(mode__isnull=True)
-            .exclude(mode='')
-            .values_list('mode', flat=True)
-            .distinct()
-            .order_by('mode')
-        )
-        self.fields['mode'].choices = [(m, self._mode_label(m)) for m in modes]
-
-    def _mode_label(self, db_mode: str) -> str:
-        if db_mode.isnumeric():
-            return roman.toRoman(int(db_mode))
-
-        return db_mode.upper()
+        self.fields['mode'].choices = Chant.MODE_CHOICES

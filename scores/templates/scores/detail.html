@@ -32,6 +32,10 @@
       <h2 class="h4">Usage</h2>
       {% include 'scores/_office_part.html' %}
 
+      <h2 class="h4">Mode, differentia</h2>
+      {{ score.get_mode_display }}
+      {{ score.mode_var|default:'' }}
+
       <h2 class="h4">Tags</h2>
       {% if tags|length == 0 %}
       <p><em>No tags.</em></p>

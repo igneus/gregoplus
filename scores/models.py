@@ -2,6 +2,17 @@ from django.db import models
 from django.db.models import CompositePrimaryKey
 from django.urls import reverse
 from django.utils.text import slugify
+import roman
+
+
+def _mode_label(db_mode: str) -> str:
+    if db_mode == 'p':
+        return 'peregrinus'
+
+    if db_mode.isnumeric():
+        return roman.toRoman(int(db_mode))
+
+    return db_mode.upper()
 
 
 class Chant(models.Model):
@@ -36,6 +47,13 @@ class Chant(models.Model):
             ('va', 'Varia'),
         ))
     )
+    MODE_CHOICES = tuple(
+        (i, _mode_label(i))
+        for i in (
+            [str(j) for j in range(1, 9)] +
+            ['c', 'd', 'e', 'p']
+        )
+    )
     id = models.AutoField(primary_key=True)
     incipit = models.CharField(max_length=256)
     office_part = models.CharField(
@@ -44,7 +62,7 @@ class Chant(models.Model):
         choices=OFFICE_PART_CHOICES,
         null=True,
     )
-    mode = models.CharField(max_length=8, null=True)
+    mode = models.CharField(max_length=8, null=True, choices=MODE_CHOICES)
     mode_var = models.CharField(max_length=16, null=True)
     version = models.CharField(max_length=128, null=True)
     gabc = models.TextField(null=True)
