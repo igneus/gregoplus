@@ -32,7 +32,13 @@
           <a href="https://cantusindex.org/id/{{ score.cantusid }}">{{ score.cantusid }}</a>
         {% endif %}
       </td>
-      <td><a href="{% url 'scores:gabc' score.id %}" class="btn btn-sm btn-outline-secondary">GABC</a></td>
+      <td>
+        <a href="{% url 'scores:gabc' score.id %}" class="btn btn-sm btn-outline-secondary">GABC</a>
+        <a href="https://gregobase.selapa.net/chant.php?id={{ score.id }}" title="GregoBase" class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-box-arrow-up-right mx-1"></i>
+          GB
+        </a>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
