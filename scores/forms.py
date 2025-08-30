@@ -27,3 +27,7 @@ class ChantFilterForm(forms.Form):
         self.fields['office_part'].choices = office_choices
 
         self.fields['mode'].choices = Chant.MODE_CHOICES
+
+    def is_empty(self) -> bool:
+        # cleaned_data is only defined if there are any submitted data
+        return not hasattr(self, 'cleaned_data')

@@ -5,25 +5,37 @@
 
 <form method="get" class="mb-3">
   <div class="row gy-2 gx-3 align-items-start">
-    <div class="col-12 col-md-4">
-      {{ form.incipit.label_tag }}
+    <div class="col-12 col-md-3">
+      <label for="{{ form.incipit.id_for_label }}" class="form-label fw-semibold">{{ form.incipit.label }}</label>
       {{ form.incipit }}
     </div>
 
-    <div class="col-12 col-md-4">
-      <div class="mb-1 fw-semibold">{{ form.office_part.label }}</div>
-      {{ form.office_part }}
+    <div class="col-12 col-md-7">
+      <span class="fw-semibold">{{ form.mode.label }}</span>
+      {% for checkbox in form.mode %}
+        <div class="form-check form-check-inline">
+          {{ checkbox.tag }}
+          <label class="form-check-label" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+        </div>
+      {% endfor %}
     </div>
 
-    <div class="col-12 col-md-4">
-      <div class="mb-1 fw-semibold">{{ form.mode.label }}</div>
-      {{ form.mode }}
-    </div>
-
-    <div class="col-12 mt-2">
+    <div class="col-12 col-md-2">
       <button type="submit" class="btn btn-primary">Filter</button>
-      <a class="btn btn-outline-secondary" href="{% url 'scores:index' %}">Reset</a>
+      <a class="btn btn-outline-secondary {% if form.is_empty %}disabled{% endif %}" href="{% url 'scores:index' %}">Reset</a>
     </div>
+  </div>
+
+  <div class=" row mt-4">
+    <span class="fw-semibold">{{ form.office_part.label }}</span>
+    {% for checkbox in form.office_part %}
+      <div class="col-md-2">
+        <div class="form-check form-check-inline">
+          {{ checkbox.tag }}
+          <label class="form-check-label d-inline" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 </form>
 
