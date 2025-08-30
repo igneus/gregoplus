@@ -28,6 +28,8 @@ class ChantFilterForm(forms.Form):
 
         self.fields['mode'].choices = Chant.MODE_CHOICES
 
+        self.fields['incipit'].widget.attrs['class'] = 'form-control'
+
     def is_empty(self) -> bool:
         # cleaned_data is only defined if there are any submitted data
         return not hasattr(self, 'cleaned_data')
