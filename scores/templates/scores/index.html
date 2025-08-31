@@ -5,10 +5,10 @@
 
 <form method="get" class="mb-3">
   <div class="row gy-2 gx-3 align-items-start">
-      <label for="{{ form.incipit.id_for_label }}" class="col-12 col-md-1 col-form-label form-label fw-semibold">{{ form.incipit.label }}</label>
-      <div class="col col-12 col-md-9">
-        {{ form.incipit }}
-      </div>
+    <label for="{{ form.incipit.id_for_label }}" class="col-12 col-md-1 col-form-label form-label fw-semibold">{{ form.incipit.label }}</label>
+    <div class="col col-12 col-md-9">
+      {{ form.incipit }}
+    </div>
 
     <div class="col-12 col-md-2">
       <button type="submit" class="btn btn-primary px-4">Filter</button>
@@ -18,14 +18,14 @@
 
   <div class="row mt-4">
     <span class="fw-semibold">{{ form.mode.label }}</span>
-      {% for checkbox in form.mode %}
-        <div class="col-4 col-md-1">
-          <div class="form-check form-check-inline text-nowrap overflow-hidden">
-            {{ checkbox.tag }}
-            <label class="form-check-label d-inline" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
-          </div>
+    {% for checkbox in form.mode %}
+      <div class="col-4 col-md-1">
+        <div class="form-check form-check-inline text-nowrap overflow-hidden">
+          {{ checkbox.tag }}
+          <label class="form-check-label d-inline" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
         </div>
-      {% endfor %}
+      </div>
+    {% endfor %}
   </div>
 
   <div class="row mt-4">
