@@ -7,6 +7,7 @@ from .gabc import Gabc
 from .utils import paginate_if_needed
 from .forms import ChantFilterForm
 
+
 def index(request):
     qs = Chant.objects.all()
 
@@ -30,6 +31,7 @@ def index(request):
         'form': form,
     })
 
+
 def detail(request, score_id, office_part=None, incipit_slug=None):
     score = get_object_or_404(Chant, id=score_id)
 
@@ -46,13 +48,16 @@ def detail(request, score_id, office_part=None, incipit_slug=None):
         'chant_sources': score.chant_sources.all(),
     })
 
+
 def gabc(request, score_id):
     score = get_object_or_404(Chant, id=score_id)
     return HttpResponse(Gabc(score), content_type='text/plain; charset=utf-8')
 
+
 def incipit(request):
     incipits = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
     return render(request, 'scores/incipit.html', {'incipits': incipits})
+
 
 def incipit_detail(request, incipit):
     if incipit == 'no-lyrics':
@@ -69,8 +74,10 @@ def incipit_detail(request, incipit):
         'page_obj': page_obj,
     })
 
+
 def usage(request):
     return render(request, 'scores/usage.html', {'types': Chant.OFFICE_PART_CHOICES})
+
 
 def usage_detail(request, usage_id):
     scores = Chant.objects.filter(office_part=usage_id)
@@ -84,9 +91,11 @@ def usage_detail(request, usage_id):
         'page_obj': page_obj,
     })
 
+
 def tag(request):
     tags = Tag.objects.annotate(chant_count=Count('scores')).filter(chant_count__gt=1)
     return render(request, 'scores/tag.html', {'tags': tags})
+
 
 def tag_detail(request, tag_id):
     tag = get_object_or_404(Tag, pk=tag_id)
@@ -98,9 +107,11 @@ def tag_detail(request, tag_id):
         'page_obj': page_obj,
     })
 
+
 def source(request):
     sources = Source.objects.all()
     return render(request, 'scores/source.html', {'sources': sources})
+
 
 def source_detail(request, source_id):
     source = get_object_or_404(Source, id=source_id)

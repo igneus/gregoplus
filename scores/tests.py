@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 import json
 from .models import Chant, Source, ChantSource
-import unittest
+
 
 class ScoresTest(TestCase):
     "Test that all views load without error"
@@ -10,7 +10,7 @@ class ScoresTest(TestCase):
         self._score = Chant.objects.create(
             incipit='Alleluia',
             gabc='"(c4) Al(h)le(h)lu(hh)ia(f!gaGFE) (::)"',
-            office_part='va', # va = varia (codes inherited from gregobase)
+            office_part='va',  # va = varia (codes inherited from gregobase)
         )
         self._source = Source.objects.create(
             year=2018,

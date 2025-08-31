@@ -78,6 +78,7 @@ class Chant(models.Model):
     duplicateof = models.ForeignKey('Chant', db_column='duplicateof', null=True, on_delete=models.SET_NULL, related_name='duplicates')
     tags = models.ManyToManyField('Tag', through='ChantTag', related_name='scores')
     sources = models.ManyToManyField('Source', through='ChantSource', related_name='chants')
+
     class Meta:
         db_table = 'gregobase_chants'
         ordering = ('incipit',)
@@ -97,6 +98,7 @@ class Chant(models.Model):
     def incipit_slug(self):
         return slugify(self.incipit)
 
+
 class Source(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=256)
@@ -105,6 +107,7 @@ class Source(models.Model):
     description = models.TextField()
     caption = models.TextField()
     pages = models.TextField()
+
     class Meta:
         db_table = 'gregobase_sources'
         ordering = ('-year', 'title')
@@ -115,6 +118,7 @@ class Source(models.Model):
     def get_absolute_url(self):
         return reverse('scores:source_detail', args=[self.id])
 
+
 class ChantSource(models.Model):
     # TODO in fact this model has a composite primary key, but as of Django 5.2
     #   Django Admin doesn't support that, so we pretend to have a simple one
@@ -123,10 +127,12 @@ class ChantSource(models.Model):
     page = models.CharField(max_length=16)
     sequence = models.IntegerField()
     extent = models.IntegerField()
+
     class Meta:
         db_table = 'gregobase_chant_sources'
         unique_together = (('chant', 'source', 'page'),)
         ordering = ('source', 'page', 'sequence',)
+
 
 class ChantWithSource:
     """
@@ -145,6 +151,7 @@ class ChantWithSource:
 
     def __getattr__(self, item):
         return getattr(self.chant, item)
+
 
 class Tag(models.Model):
     id = models.AutoField(primary_key=True)

@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator
 
+
 def paginate_if_needed(queryset, request, per_page=25, threshold=25):
     """
     Add pagination if queryset has more than threshold items.

@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from . import models
 
+
 @admin.register(models.Chant)
 class ScoreAdmin(admin.ModelAdmin):
     list_display = [
@@ -20,6 +21,7 @@ class ScoreAdmin(admin.ModelAdmin):
         'mode',
     ]
 
+
 @admin.register(models.Source)
 class SourceAdmin(admin.ModelAdmin):
     list_display = [
@@ -28,6 +30,7 @@ class SourceAdmin(admin.ModelAdmin):
         'year',
         'editor',
     ]
+
 
 @admin.register(models.ChantSource)
 class ChantSourceAdmin(admin.ModelAdmin):

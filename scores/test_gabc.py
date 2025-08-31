@@ -1,4 +1,3 @@
-from json import JSONDecodeError
 from unittest import TestCase
 
 from scores.gabc import Gabc
@@ -28,7 +27,7 @@ class GabcTest(TestCase):
 
     def test_all_relevant_properties(self):
         chant = Chant(
-            incipit = 'Amen',
+            incipit='Amen',
             gabc='"(c3) A(h)men.(h) (::)"',
             gabc_verses='A(g)men.(gh) (::)',
             office_part='va',
@@ -72,7 +71,7 @@ class GabcTest(TestCase):
     def test_unsupported_type(self):
         chant = Chant(
             incipit='Amen',
-            gabc='0' # JSON number
+            gabc='0'  # JSON number
         )
         gabc = Gabc(chant)
         with self.assertRaisesRegex(ValueError, r'Unsupported JSON value type'):

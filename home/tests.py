@@ -1,5 +1,6 @@
 from django.test import TestCase, Client
 
+
 class HomeTest(TestCase):
     def test_index(self):
         client = Client()

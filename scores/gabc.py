@@ -15,7 +15,6 @@ class Gabc:
             except JSONDecodeError:
                 raise ValueError('Value of the Chant.gabc property must be a valid JSON')
 
-
     def __str__(self):
         # TODO: load and print chant sources
 
