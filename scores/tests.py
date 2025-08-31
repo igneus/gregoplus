@@ -108,12 +108,12 @@ class ScoresTest(TestCase):
 
     def test_incipit(self):
         client = Client()
-        response = client.get('/scores/incipit'.format(self._score.id))
+        response = client.get('/scores/incipit')
         self.assertEqual(response.status_code, 200)
 
     def test_incipit_detail(self):
         client = Client()
-        response = client.get('/scores/incipit/A'.format(self._score.id))
+        response = client.get('/scores/incipit/A')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self._score.incipit)
 
