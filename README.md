@@ -37,3 +37,11 @@ and analyzing the chant repertory.
 ## License
 
 GNU/GPL 3.0
+
+## See also
+
+[GregoSearch](https://github.com/gregoriano-br/GregoSearch)
+seems to pursue very similar goals with the same data.
+At the time of writing an important difference is that GregoSearch
+doesn't have a real backend. Instead it loads complete data
+as a huge static JSON document and does all data processing in the web browser.
