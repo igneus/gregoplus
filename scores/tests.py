@@ -138,7 +138,7 @@ class ScoresTest(TestCase):
         response = client.get('/scores/source')
         self.assertEqual(response.status_code, 200)
 
-    def test_detail(self):
+    def test_source_detail(self):
         client = Client()
         response = client.get('/scores/source/{}'.format(self._source.id))
         self.assertEqual(response.status_code, 200)
